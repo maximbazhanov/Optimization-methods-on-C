@@ -12,33 +12,33 @@ void main()
 
 	int n;
 
-	cout << "Введите количество координат: ";
+	cout << "Enter number of coordinates: ";
 	cin >> n;
 	n++;	// One cell for value of function 
 
 	vector< vector< double > > data(3, n);
 
 	int i,j;
-	cout << "Введите координаты точки: ";
+	cout << "Enter begin coordinates: ";
 	for(j=0; j<n-1; j++) {
 		cin >> data[0][j];
 		data[1][j]=data[0][j];
 	}
 
 	double step;
-	cout << "Введите шаг: ";
+	cout << "Enter step: ";
 	cin >> step;
 
 	double contraction;
-	cout << "Введите коэффициент уменьшение шага: ";
+	cout << "Enter contraction rate: ";
 	cin >> contraction;
 
 	double expansion;
-	cout << "Введите коэффициент растяжения: ";
+	cout << "Enter expansion rate: ";
 	cin >> expansion;
 
 	double precision;
-	cout << "Введите точность: ";
+	cout << "Enter precision: ";
 	cin >> precision;
 
 	for(i=0; step > precision; i++) {
@@ -62,11 +62,11 @@ void main()
 		}
 	}
 
-	cout << "\nРешение\nКоличество итераций: " << i << endl;
+	cout << "\nSolution\nIterations: " << i << endl;
 	for(j=0; j<n-1; j++) {
-		cout << "\nКоордината " << j << ": "  << data[0][j];
+		cout << "\nCoordinate " << j << ": "  << data[0][j];
 	}
-	cout << "\nЗначение функции: " << data[0][n-1] << endl;
+	cout << "\nFunction value: " << data[0][n-1] << endl;
 }
 
 void research(vector < vector<double> > &data, double step, int n)
