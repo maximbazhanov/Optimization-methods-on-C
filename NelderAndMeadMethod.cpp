@@ -32,12 +32,10 @@ template <class type1> void nelderAndMeadMethod(vector< type1 > &a, type1 length
 	n = a.size();
 	vector< vector< type1 >> data(n + 1, n + 1);
 
-	// В первой строке нового массива — координаты начальной точки
 	for(j = 0; j < n; j++) {
 		data[0][j] = a[j];
 	}
 
-	// Расчет координат симплекса
 	for(i = 1; i < (int) data.size(); i++) {
 		for(j = 0; j < n; j++) {
 			if(i - 1 == j) {
