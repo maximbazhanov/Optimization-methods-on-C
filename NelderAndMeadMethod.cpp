@@ -26,16 +26,28 @@ template <class type1> void vectorOutput(vector< vector< type1 >> &a)
 	}
 }
 
+template <class type1> void vectorOutput(vector< type1 > &a)
+{
+	int i;
+
+	for(i = 0; i < (int) a.size(); i++) {
+		cout << setw(8) << a[i] << "  ";
+	}
+}
+
 template <class type1> void nelderAndMeadMethod(vector< type1 > &a, type1 length)
 {
-	unsigned int i, j, n;
+	int i, j, n;
 	n = a.size();
 	vector< vector< type1 >> data(n + 1, n + 1);
+	vector< type1 > gravity(n);
 
+	// В первой строке нового массива — координаты начальной точки
 	for(j = 0; j < n; j++) {
 		data[0][j] = a[j];
 	}
 
+	// Расчет координат симплекса
 	for(i = 1; i < (int) data.size(); i++) {
 		for(j = 0; j < n; j++) {
 			if(i - 1 == j) {
@@ -47,14 +59,30 @@ template <class type1> void nelderAndMeadMethod(vector< type1 > &a, type1 length
 		}
 	}
 	
+	// Расчет значений функции в каждой точке симплекса
 	for(i = 0; i < (int) data.size(); i++) {
 		objFunction(data, i);
 	}
 
-	vectorOutput(data);
-	cout << endl;
+	//vectorOutput(data);
+	
 	Sort(data);
+
+	// Расчет центра тяжести всех точек кроме самой верхней
+	for(j = 0; j < n; j++) {
+		gravity[j] = 0;
+		for(i = 1; i < (int) data.size(); i++) {
+			gravity[j] = gravity[j] + data[i][j];
+		}
+		gravity[j] = gravity[j] / n;
+	}
+
 	vectorOutput(data);	
+	cout << endl;
+	vectorOutput(gravity);
+	
+	cout << endl;
+	
 }
 
 template <class type1> void objFunction(vector< vector< type1 >> &a, int i)
@@ -82,7 +110,7 @@ template <class type1> void Sort(vector< vector< type1 >> &a)
 
 void main()
 {
-	vector< double > a(4);
+	vector< double > a(2);
 	cout << "Enter the begin point: ";
 	vectorInput(a);
 	double length;
